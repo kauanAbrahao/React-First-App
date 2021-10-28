@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Counter extends Component {
+
+    //Objetos:
     state = {
         count:0
     };
@@ -11,6 +13,7 @@ class Counter extends Component {
         fontWeight: 'bold' 
     };
 
+    //Renderer:
     render() { 
         return  (<React.Fragment>
                     <span style={this.styles} className={this.formatButton()}>{this.formatCount()}</span>
@@ -18,6 +21,7 @@ class Counter extends Component {
                 </React.Fragment>);
     }
 
+    //Métodos:
     formatCount(){
         const {count} = this.state;
         return count === 0 ? 'Zero' : count;
