@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
 class Counter extends Component {
+    //teste commit
 
     //Objetos:
     state = {
