@@ -5,6 +5,8 @@ class Counter extends Component {
     //teste commit
 
     //Objetos:
+    //Lembrando: Atributos dentro de state são EXCLUSIVOS do Component.
+    //Atributos herdados do props são READ ONLY.
     state = {
         value: this.props.value,
         tags: ["tag1", "tag2", "tag3"]
@@ -17,16 +19,17 @@ class Counter extends Component {
 
     //Renderer:
     render() { 
-        return  (<React.Fragment>
+        return  (<div>
                     {this.props.children}
                     <span style={this.styles} className={this.formatBadge()}>{this.formatCount()}</span>
-                    <button onClick={(e) => this.handleIncrement({increment : true})} className="button btn-success">Increment</button>;
-                    <button onClick={(e) => this.handleIncrement({increment: false})} className="button btn-danger">Decrement</button>;
+                    <button onClick={(e) => this.handleIncrement({increment : true})} className="button btn-success btn-sm">Increment</button>
+                    <button onClick={(e) => this.handleIncrement({increment: false})} className="button btn-dark btn-sm m-1">Decrement</button>
+                    <button onClick={this.handleDelete()} className="btn btn-danger btn-sm m-2">Delete</button>
                     <ul>
                         {this.state.tags.length === 0 && "No tags found"}
                         {this.renderTags()}
                     </ul>
-                </React.Fragment>);
+                </div>);
     }
 
     handleIncrement = (isIncrement) => {
@@ -39,6 +42,10 @@ class Counter extends Component {
         }
         
     };
+
+    handleDelete (){
+        console.log("click");
+    }
 
     //Métodos:
     formatCount(){
