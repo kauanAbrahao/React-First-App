@@ -6,7 +6,8 @@ class Counter extends Component {
 
     //Objetos:
     state = {
-        count:0
+        count:0,
+        tags: ["tag1", "tag2", "tag3"]
     };
 
     styles = {
@@ -17,10 +18,26 @@ class Counter extends Component {
     //Renderer:
     render() { 
         return  (<React.Fragment>
-                    <span style={this.styles} className={this.formatButton()}>{this.formatCount()}</span>
-                    <button className="button btn-seconday">Increment</button>;
+                    <span style={this.styles} className={this.formatBadge()}>{this.formatCount()}</span>
+                    <button onClick={(e) => this.handleIncrement(Boolean(true))} className="button btn-success">Increment</button>;
+                    <button onClick={(e) => this.handleIncrement(Boolean(false))} className="button btn-danger">Decrement</button>;
+                    <ul>
+                        {this.state.tags.length === 0 && "No tags found"}
+                        {this.renderTags()}
+                    </ul>
                 </React.Fragment>);
     }
+
+    handleIncrement = (isIncrement) => {
+        // this.state.count++; NÃO FUNCIONA, pois o React não sabe que foi alterado!
+        if(isIncrement){
+            this.setState({ count: this.state.count + 1})
+        }
+        else{
+            this.setState({count: this.state.count - 1 })
+        }
+        
+    };
 
     //Métodos:
     formatCount(){
@@ -28,10 +45,25 @@ class Counter extends Component {
         return count === 0 ? 'Zero' : count;
     }
 
-    formatButton(){
+    formatBadge(){
         let buttonColor = "badge m-2 ";
         buttonColor += (this.state.count === 0) ? "bg-warning" : "bg-primary";
         return buttonColor;
+    }
+
+    renderTags(){
+        if(this.state.tags.length === 0) return null;
+
+        return <ul>{this.state.tags.map(tag=> <li key={tag}> {tag} </li>)}</ul>
+        
+        /*
+        Observe que, para o JS:
+            true && false -> retorna false;
+            true && "Hi" -> retorna "hi";
+            true && "Hi" && 1 -> retorna 1;
+            true && '' -> retorna false;
+        */
+    
     }
 }
  
