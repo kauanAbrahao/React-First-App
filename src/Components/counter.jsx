@@ -6,21 +6,22 @@ class Counter extends Component {
 
     //Objetos:
     state = {
-        count:0,
+        value: this.props.value,
         tags: ["tag1", "tag2", "tag3"]
     };
 
     styles = {
-        fontSize: 20,
+        fontSize: 13,
         fontWeight: 'bold' 
     };
 
     //Renderer:
     render() { 
         return  (<React.Fragment>
+                    {this.props.children}
                     <span style={this.styles} className={this.formatBadge()}>{this.formatCount()}</span>
-                    <button onClick={(e) => this.handleIncrement(Boolean(true))} className="button btn-success">Increment</button>;
-                    <button onClick={(e) => this.handleIncrement(Boolean(false))} className="button btn-danger">Decrement</button>;
+                    <button onClick={(e) => this.handleIncrement({increment : true})} className="button btn-success">Increment</button>;
+                    <button onClick={(e) => this.handleIncrement({increment: false})} className="button btn-danger">Decrement</button>;
                     <ul>
                         {this.state.tags.length === 0 && "No tags found"}
                         {this.renderTags()}
@@ -30,24 +31,24 @@ class Counter extends Component {
 
     handleIncrement = (isIncrement) => {
         // this.state.count++; NÃO FUNCIONA, pois o React não sabe que foi alterado!
-        if(isIncrement){
-            this.setState({ count: this.state.count + 1})
-        }
+        if(isIncrement.increment){
+            this.setState({ value: this.state.value + 1})
+        }   
         else{
-            this.setState({count: this.state.count - 1 })
+            this.setState({value: this.state.value - 1 })
         }
         
     };
 
     //Métodos:
     formatCount(){
-        const {count} = this.state;
+        const {value: count} = this.state;
         return count === 0 ? 'Zero' : count;
     }
 
     formatBadge(){
         let buttonColor = "badge m-2 ";
-        buttonColor += (this.state.count === 0) ? "bg-warning" : "bg-primary";
+        buttonColor += (this.state.value === 0) ? "bg-warning" : "bg-primary";
         return buttonColor;
     }
 

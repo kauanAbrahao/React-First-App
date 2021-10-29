@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
-import Counter from './Components/counter.jsx'
+import Counters from './Components/counters.jsx'
 
+
+/*Nossa Components Tree está dessa forma:
+  Counters
+    Counter
+
+*/
 ReactDOM.render( 
   <React.StrictMode>
-    <Counter/>
+    <Counters/>
   </React.StrictMode>,
   document.getElementById('root')
 );
