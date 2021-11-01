@@ -8,7 +8,7 @@ class Counter extends Component {
     //Lembrando: Atributos dentro de state são EXCLUSIVOS do Component.
     //Atributos herdados do props são READ ONLY.
     state = {
-        value: this.props.value,
+        value: this.props.counter.value,
         tags: ["tag1", "tag2", "tag3"]
     };
 
@@ -24,7 +24,8 @@ class Counter extends Component {
                     <span style={this.styles} className={this.formatBadge()}>{this.formatCount()}</span>
                     <button onClick={(e) => this.handleIncrement({increment : true})} className="button btn-success btn-sm">Increment</button>
                     <button onClick={(e) => this.handleIncrement({increment: false})} className="button btn-dark btn-sm m-1">Decrement</button>
-                    <button onClick={this.handleDelete()} className="btn btn-danger btn-sm m-2">Delete</button>
+                    <button onClick={(e) => this.handleDelete()} className="btn btn-danger btn-sm m-2">Delete</button>
+                    <button onClick={(e) => this.props.onDelete(this.props.counter.id)} className="btn btn-danger m-2">Delete Counter</button>
                     <ul>
                         {this.state.tags.length === 0 && "No tags found"}
                         {this.renderTags()}
@@ -45,7 +46,8 @@ class Counter extends Component {
 
     handleDelete (){
         console.log("click");
-    }
+        this.setState({value: 0})
+    };
 
     //Métodos:
     formatCount(){
